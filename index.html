@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplicación de Fracciones</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Multiplicación de Fracciones</h1>
+        
+        <div class="main-content">
+            <!-- Primer cuadrado (columnas) -->
+            <div class="square-container">
+                <div id="square1" class="square"></div>
+                <div class="info-text">Divide el cuadro en:</div>
+                <div class="buttons-container">
+                    <button class="num-btn active" data-square="1" data-value="1">1</button>
+                    <button class="num-btn" data-square="1" data-value="2">2</button>
+                    <button class="num-btn" data-square="1" data-value="3">3</button>
+                    <button class="num-btn" data-square="1" data-value="4">4</button>
+                    <button class="num-btn" data-square="1" data-value="5">5</button>
+                    <button class="num-btn" data-square="1" data-value="6">6</button>
+                </div>
+            </div>
+            
+            <!-- Signo de multiplicación -->
+            <div class="operator">×</div>
+            
+            <!-- Segundo cuadrado (filas) -->
+            <div class="square-container">
+                <div id="square2" class="square"></div>
+                <div class="info-text">Divide el cuadro en:</div>
+                <div class="buttons-container">
+                    <button class="num-btn active" data-square="2" data-value="1">1</button>
+                    <button class="num-btn" data-square="2" data-value="2">2</button>
+                    <button class="num-btn" data-square="2" data-value="3">3</button>
+                    <button class="num-btn" data-square="2" data-value="4">4</button>
+                    <button class="num-btn" data-square="2" data-value="5">5</button>
+                    <button class="num-btn" data-square="2" data-value="6">6</button>
+                </div>
+            </div>
+            
+            <!-- Signo igual -->
+            <div class="operator">=</div>
+            
+            <!-- Botón ver resultado o cuadrado resultado -->
+            <div class="result-container">
+                <button id="showResult" class="result-btn">Ver resultado</button>
+                <div id="resultSquare" class="square hidden"></div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Desarrollado por Astutosoft 2026</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
