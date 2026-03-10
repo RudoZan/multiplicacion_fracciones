@@ -6,40 +6,478 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    background: linear-gradient(135deg, #5a7ba8 0%, #4a6fa5 50%, #3d5f8f 100%);
+    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 50%, #9fa8da 100%);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 15px;
+    padding: 5px;
     position: relative;
+    overflow-y: auto;
+}
+
+/* Navegación */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    padding: 12px 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.nav-title {
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.25);
+    font-weight: 600;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background-color: white;
+    border-radius: 2px;
 }
 
 .container {
     background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
     border-radius: 16px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-    max-width: 850px;
+    max-width: 95%;
     width: 100%;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para página de desafíos */
+.challenge-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.challenge-info .check-btn {
+    margin-left: auto;
+}
+
+.challenge-counter {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.challenge-feedback {
+    font-size: 0.95em;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.challenge-feedback.correct {
+    background-color: #4caf50;
+    color: white;
+}
+
+.challenge-feedback.incorrect {
+    background-color: #f44336;
+    color: white;
+}
+
+.challenge-content {
+    margin-top: 20px;
+}
+
+.challenge-instruction {
+    text-align: center;
+    font-size: 1em;
+    font-weight: 500;
+    color: #5a7ba8;
+    margin: 20px 0;
+    padding: 12px;
+    background-color: #f0f4f8;
+    border-radius: 6px;
+    border-left: 4px solid #5a7ba8;
+}
+
+.challenge-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.check-btn {
+    padding: 12px 30px;
+    font-size: 1em;
+    background: linear-gradient(135deg, #5a7ba8 0%, #4a6fa5 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(90, 123, 168, 0.25);
+}
+
+.check-btn:hover {
+    background: linear-gradient(135deg, #4a6fa5 0%, #3d5f8f 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(90, 123, 168, 0.35);
+}
+
+.check-btn:active {
+    transform: translateY(0);
+}
+
+.nav-challenges {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-challenge-btn {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    background-color: #e8ecf1;
+    color: #2c3e50;
+    border: 2px solid #5a7ba8;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-challenge-btn:hover:not(:disabled) {
+    background-color: #5a7ba8;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.nav-challenge-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* En desafíos: dos cuadros fijos y uno editable. Solo el editable se puede clicar. */
+.challenge-square-fixed {
+    pointer-events: none;
+    cursor: default;
+}
+
+.challenge-square-editable {
+    cursor: pointer;
+}
+
+/* Editable square stands out so the user knows which one to interact with */
+.page-desafios .challenge-content .square.challenge-square-editable {
+    border: 3px solid #2c5aa0;
+    box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.3), 0 4px 16px rgba(44, 90, 160, 0.25);
+    background-color: #c5daf5;
+}
+.page-desafios .challenge-content .square.challenge-square-editable:hover {
+    box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.4), 0 6px 20px rgba(44, 90, 160, 0.3);
+}
+
+/* Blink 5 times when challenge loads so user spots the editable frame */
+@keyframes challenge-frame-blink {
+    0%, 9%, 19%, 29%, 39%, 49%, 59%, 69%, 79%, 89%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.3), 0 4px 16px rgba(44, 90, 160, 0.25);
+    }
+    4%, 14%, 24%, 34%, 44%, 54%, 64%, 74%, 84%, 94% {
+        opacity: 0.65;
+        box-shadow: 0 0 0 4px rgba(44, 90, 160, 0.6), 0 4px 20px rgba(44, 90, 160, 0.45);
+    }
+}
+
+.page-desafios .challenge-content .square.challenge-square-editable.challenge-frame-blink {
+    animation: challenge-frame-blink 2s ease-in-out 1;
+}
+
+/* Estilos para celdas en desafíos */
+.square.grid .cell.correct-answer {
+    background-color: #6b9bd1;
+    border: 2px solid #5a7ba8;
+}
+
+.square.grid .cell.user-selected {
+    background-color: #ffb74d;
+    border: 2px solid #ffa726;
+    box-shadow: inset 0 0 8px rgba(255, 183, 77, 0.4);
+}
+
+.square.grid .cell.user-selected.correct-answer {
+    background-color: #6b9bd1;
+    border: 2px solid #5a7ba8;
+}
+
+.header-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 h1 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 25px;
+    margin: 0;
     font-size: 1.8em;
     font-weight: 600;
     letter-spacing: -0.5px;
 }
 
+.info-icon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #5a7ba8;
+    color: white;
+    border: 2px solid #5a7ba8;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.info-icon:hover {
+    background-color: #4a6fa5;
+    border-color: #4a6fa5;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 8px rgba(90, 123, 168, 0.3);
+}
+
+.info-icon:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.title-divider {
+    border: none;
+    border-top: 2px solid #b8c5d6;
+    margin: 0 auto 15px auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+.brief-instruction {
+    text-align: center;
+    color: #5a7ba8;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin: 0 auto 25px auto;
+    max-width: 700px;
+    line-height: 1.5;
+    padding: 0 20px;
+}
+
+/* Modal/Popup */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideDown 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #e8ecf1;
+    background: linear-gradient(135deg, #5a7ba8 0%, #4a6fa5 100%);
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 25px;
+    color: #2c3e50;
+}
+
+.modal-body p {
+    font-size: 1em;
+    margin-bottom: 15px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.modal-body ol {
+    font-size: 0.95em;
+    line-height: 1.8;
+    padding-left: 25px;
+}
+
+.modal-body li {
+    margin-bottom: 12px;
+}
+
+.modal-body li strong {
+    color: #5a7ba8;
+    font-weight: 600;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 .main-content {
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    width: 100%;
+}
+
+.multiplication-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: auto;
+}
+
+.table-cell {
+    vertical-align: middle;
+    padding: 0 8px;
+}
+
+.square-cell {
+    vertical-align: top;
+}
+
+.operator-cell {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.result-cell {
+    vertical-align: top;
 }
 
 .square-container {
@@ -47,6 +485,15 @@ h1 {
     flex-direction: column;
     align-items: center;
     gap: 6px;
+}
+
+.selection-text {
+    font-size: 0.9em;
+    color: #2c3e50;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
 }
 
 .square {
@@ -177,9 +624,9 @@ h1 {
     font-size: 2.5em;
     color: #2c3e50;
     font-weight: 600;
-    margin: 0 6px;
-    margin-top: 65px;
+    margin: 0;
     opacity: 0.85;
+    line-height: 1;
 }
 
 .info-text {
@@ -196,14 +643,52 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    position: relative;
+}
+
+.result-text-btn {
+    font-size: 0.75em;
+    color: #5a7ba8;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    text-decoration: underline;
+    transition: all 0.2s ease;
+    letter-spacing: 0.2px;
+}
+
+.result-text-btn:hover {
+    color: #4a6fa5;
+    text-decoration: none;
+}
+
+.result-text-btn:active {
+    opacity: 0.7;
+}
+
+.result-placeholder {
+    background-color: #d4dde8 !important;
+    border: 2.5px solid #b8c5d6 !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+    width: 170px !important;
+    height: 170px !important;
+    min-height: 170px !important;
 }
 
 .result-container.showing-result {
     align-items: center;
 }
 
-.result-container.showing-result .result-btn {
+.result-container.showing-result .result-text-btn {
+    display: none !important;
+}
+
+.result-container.showing-result .result-placeholder {
     display: none !important;
 }
 
@@ -212,34 +697,138 @@ h1 {
     margin-top: 0;
 }
 
-.result-btn {
-    padding: 10px 22px;
-    font-size: 0.95em;
-    background: linear-gradient(135deg, #5a7ba8 0%, #4a6fa5 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
+.result-container:not(.showing-result) .square.grid {
+    display: none !important;
+}
+
+/* ========== Página Desafíos: CSS propio para cuadros, celdas y selecciones (mismo color, reglas distintas a Inicio) ========== */
+.page-desafios .challenge-content .square {
+    width: 170px;
+    height: 170px;
+    border: 2.5px solid #5a7ba8;
+    background-color: #ffffff;
+    position: relative;
+    display: flex;
     cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(90, 123, 168, 0.25);
-    margin-top: 65px;
-    display: block;
-    letter-spacing: 0.3px;
+    box-shadow: 0 4px 12px rgba(90, 123, 168, 0.15), 0 0 0 1px rgba(90, 123, 168, 0.1);
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease;
+}
+
+.page-desafios .challenge-content .square:hover {
+    box-shadow: 0 6px 16px rgba(90, 123, 168, 0.2), 0 0 0 1px rgba(90, 123, 168, 0.15);
+}
+
+.page-desafios .challenge-content .square.columns .column {
+    flex: 1;
+    border-right: 2px solid #5a7ba8;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.page-desafios .challenge-content .square.columns .column:last-child {
+    border-right: none;
+}
+
+.page-desafios .challenge-content .square.columns .column.selected {
+    background-color: #6b9bd1;
+    box-shadow: inset 0 0 10px rgba(107, 155, 209, 0.3);
+}
+
+.page-desafios .challenge-content .square.rows .row {
+    flex: 1;
+    border-bottom: 2px solid #5a7ba8;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.page-desafios .challenge-content .square.rows .row:last-child {
+    border-bottom: none;
+}
+
+.page-desafios .challenge-content .square.rows .row.selected {
+    background-color: #6b9bd1;
+    box-shadow: inset 0 0 10px rgba(107, 155, 209, 0.3);
+}
+
+/* Cuadro de resultado en desafíos: mismo aspecto que los otros dos cuadros */
+.challenge-result-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.challenge-result-grid {
+    width: 170px;
+    height: 170px;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    border: 2.5px solid #5a7ba8;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(90, 123, 168, 0.15), 0 0 0 1px rgba(90, 123, 168, 0.1);
+    pointer-events: none;
+}
+
+.challenge-result-cell {
+    background-color: #ffffff;
+    border-right: 2px solid #5a7ba8;
+    border-bottom: 2px solid #5a7ba8;
+}
+
+.challenge-result-cell.cell-last-col {
+    border-right: none;
+}
+
+.challenge-result-cell.cell-last-row {
+    border-bottom: none;
+}
+
+.challenge-result-cell.challenge-result-cell-marked {
+    background-color: #6b9bd1;
+}
+
+/* Cuando el cuadro resultado es editable (desafío type 'result') */
+.challenge-result-wrapper.challenge-result-editable .challenge-result-grid {
+    border: 3px solid #2c5aa0;
+    box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.3), 0 4px 16px rgba(44, 90, 160, 0.25);
+    background-color: #c5daf5;
+    cursor: pointer;
+}
+
+.challenge-result-wrapper.challenge-result-editable .challenge-result-grid:hover {
+    box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.4), 0 6px 20px rgba(44, 90, 160, 0.3);
+}
+
+.page-desafios .challenge-result-grid.challenge-frame-blink {
+    animation: challenge-frame-blink 2s ease-in-out 1;
+}
+
+.page-desafios .challenge-content .square.challenge-square-fixed {
+    pointer-events: none;
+    cursor: default;
+}
+
+.result-container:not(.showing-result) .result-placeholder {
+    display: flex !important;
+}
+
+.result-container.showing-result #resultSelection {
+    display: block !important;
 }
 
 #resultSquare.hidden {
     display: none !important;
 }
 
-.result-btn:hover {
-    background: linear-gradient(135deg, #4a6fa5 0%, #3d5f8f 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(90, 123, 168, 0.35);
-}
-
-.result-btn:active {
-    transform: translateY(0);
+#resultSelection.hidden {
+    display: none !important;
 }
 
 footer {
@@ -259,22 +848,32 @@ footer p {
 }
 
 @media (max-width: 1000px) {
-    .main-content {
+    .multiplication-table {
+        display: block;
+    }
+    
+    .multiplication-table tr {
+        display: flex;
         flex-direction: column;
+        align-items: center;
+    }
+    
+    .table-cell {
+        display: block;
+        padding: 10px 0;
     }
     
     .operator {
         transform: rotate(90deg);
         margin: 10px 0;
-        margin-top: 0;
     }
     
     .info-text {
         margin: 6px 0;
     }
     
-    .result-btn {
-        margin-top: 0;
+    .result-text-btn {
+        margin-bottom: 6px;
     }
     
     .square {

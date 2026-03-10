@@ -16,8 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeButtons();
     initializeSquares();
     initializeResultButton();
+    initializeModal();
     updateSquare1();
     updateSquare2();
+    updateSelectionText1();
+    updateSelectionText2();
 });
 
 // Inicializar botones numéricos
@@ -82,6 +85,7 @@ function handleSquare1Click(e) {
     // Si se está mostrando el resultado, actualizarlo en tiempo real
     if (state.showingResult) {
         updateResult();
+        updateResultSelectionText();
     }
 }
 
@@ -103,6 +107,7 @@ function handleSquare2Click(e) {
     // Si se está mostrando el resultado, actualizarlo en tiempo real
     if (state.showingResult) {
         updateResult();
+        updateResultSelectionText();
     }
 }
 
@@ -122,6 +127,17 @@ function updateSquare1() {
         }
         square.appendChild(column);
     }
+    
+    // Actualizar texto de selección
+    updateSelectionText1();
+}
+
+// Actualizar texto de selección del primer cuadrado
+function updateSelectionText1() {
+    const selectionText = document.getElementById('selection1');
+    const selected = state.square1.selectedColumns.length;
+    const total = state.square1.divisions;
+    selectionText.textContent = `Marcado ${selected} de ${total}`;
 }
 
 // Actualizar segundo cuadrado (filas)
@@ -140,6 +156,17 @@ function updateSquare2() {
         }
         square.appendChild(row);
     }
+    
+    // Actualizar texto de selección
+    updateSelectionText2();
+}
+
+// Actualizar texto de selección del segundo cuadrado
+function updateSelectionText2() {
+    const selectionText = document.getElementById('selection2');
+    const selected = state.square2.selectedRows.length;
+    const total = state.square2.divisions;
+    selectionText.textContent = `Marcado ${selected} de ${total}`;
 }
 
 // Inicializar botón de resultado
@@ -148,16 +175,53 @@ function initializeResultButton() {
     resultBtn.addEventListener('click', showResult);
 }
 
+// Inicializar modal de instrucciones
+function initializeModal() {
+    const infoBtn = document.getElementById('infoBtn');
+    const modal = document.getElementById('instructionsModal');
+    const closeBtn = document.getElementById('closeModal');
+    
+    // Abrir modal
+    infoBtn.addEventListener('click', () => {
+        modal.classList.add('show');
+    });
+    
+    // Cerrar modal con botón X
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+    });
+    
+    // Cerrar modal al hacer clic fuera
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+        }
+    });
+    
+    // Cerrar modal con ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            modal.classList.remove('show');
+        }
+    });
+}
+
 // Mostrar resultado
 function showResult() {
     state.showingResult = true;
     const resultContainer = document.querySelector('.result-container');
     const resultBtn = document.getElementById('showResult');
+    const resultSquare = document.getElementById('resultSquare');
     
     resultContainer.classList.add('showing-result');
     resultBtn.style.display = 'none';
     
+    // Remover clase placeholder y mostrar el resultado
+    resultSquare.classList.remove('result-placeholder');
+    resultSquare.classList.remove('hidden');
+    
     updateResult();
+    updateResultSelectionText();
 }
 
 // Actualizar resultado
@@ -188,6 +252,33 @@ function updateResult() {
             resultSquare.appendChild(cell);
         }
     }
+    
+    // Actualizar texto de selección del resultado
+    if (state.showingResult) {
+        updateResultSelectionText();
+    }
+}
+
+// Actualizar texto de selección del resultado
+function updateResultSelectionText() {
+    const resultSelection = document.getElementById('resultSelection');
+    if (!resultSelection) return;
+    
+    const totalCells = state.square1.divisions * state.square2.divisions;
+    let selectedCells = 0;
+    
+    // Contar celdas seleccionadas (intersección de filas y columnas seleccionadas)
+    for (let row = 0; row < state.square2.divisions; row++) {
+        for (let col = 0; col < state.square1.divisions; col++) {
+            if (state.square2.selectedRows.includes(row) && 
+                state.square1.selectedColumns.includes(col)) {
+                selectedCells++;
+            }
+        }
+    }
+    
+    resultSelection.textContent = `Marcado ${selectedCells} de ${totalCells}`;
+    resultSelection.classList.remove('hidden');
 }
 
 // Ocultar resultado
@@ -196,8 +287,18 @@ function hideResult() {
     const resultSquare = document.getElementById('resultSquare');
     const resultContainer = document.querySelector('.result-container');
     const resultBtn = document.getElementById('showResult');
+    const resultSelection = document.getElementById('resultSelection');
     
     resultContainer.classList.remove('showing-result');
-    resultSquare.classList.add('hidden');
+    
+    // Volver a poner el placeholder
+    resultSquare.innerHTML = '';
+    resultSquare.className = 'square result-placeholder';
+    resultSquare.classList.remove('grid');
+    resultSquare.classList.remove('hidden');
+    
     resultBtn.style.display = 'block';
+    if (resultSelection) {
+        resultSelection.classList.add('hidden');
+    }
 }

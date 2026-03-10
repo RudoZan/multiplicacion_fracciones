@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafíos - Multiplicación de Fracciones</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-desafios">
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-title">Multiplicación de Fracciones</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="desafios.html" class="nav-link active">Desafíos</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="header-section">
+            <h1>Desafíos</h1>
+            <button id="infoBtnDesafios" class="info-icon" aria-label="Instrucciones">ℹ</button>
+        </div>
+        <hr class="title-divider">
+        <p class="brief-instruction">Completa los desafíos para practicar la multiplicación de fracciones</p>
+        
+        <!-- Modal de instrucciones -->
+        <div id="instructionsModalDesafios" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>¿Qué hay que hacer?</h2>
+                    <button class="close-btn" id="closeModalDesafios">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>En cada desafío verás tres cuadros que representan una multiplicación de fracciones. Según el desafío, <strong>solo uno de los cuadros es editable</strong> (se marca con borde más visible y parpadea al inicio).</p>
+                    <ol>
+                        <li><strong>Si el cuadro editable es el primero o el segundo:</strong> Haz clic en las columnas (primer cuadrado) o en las filas (segundo cuadrado) para marcar las partes que corresponden a la fracción. El cuadro de resultado muestra la respuesta correcta; tú debes elegir las columnas o filas que coincidan con ese resultado.</li>
+                        <li><strong>Si el cuadro editable es el resultado:</strong> Los dos primeros cuadros van fijos. Haz clic en las celdas del cuadro resultado para marcar la zona que representa el producto de las fracciones mostradas.</li>
+                        <li><strong>Revisar:</strong> Cuando creas que está bien, pulsa el botón «Revisar». Si es correcto verás un mensaje en verde; si no, en rojo. Puedes cambiar la selección y volver a revisar. Usa «Anterior» y «Siguiente» para cambiar de desafío.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="challenge-info">
+            <div class="challenge-counter">Desafío <span id="currentChallenge">1</span> de <span id="totalChallenges">8</span></div>
+            <div class="challenge-feedback" id="challengeFeedback"></div>
+            <button id="checkAnswer" class="check-btn">Revisar</button>
+        </div>
+        
+        <div class="challenge-content">
+            <div class="main-content">
+                <table class="multiplication-table">
+                    <tr>
+                        <!-- Primer cuadrado (columnas) -->
+                        <td class="table-cell square-cell">
+                            <div class="square-container">
+                                <div id="challengeSelection1" class="selection-text">Marcado 0 de 1</div>
+                                <div id="challengeSquare1" class="square"></div>
+                            </div>
+                        </td>
+                        
+                        <!-- Signo de multiplicación -->
+                        <td class="table-cell operator-cell">
+                            <div class="operator">×</div>
+                        </td>
+                        
+                        <!-- Segundo cuadrado (filas) -->
+                        <td class="table-cell square-cell">
+                            <div class="square-container">
+                                <div id="challengeSelection2" class="selection-text">Marcado 0 de 1</div>
+                                <div id="challengeSquare2" class="square"></div>
+                            </div>
+                        </td>
+                        
+                        <!-- Signo igual -->
+                        <td class="table-cell operator-cell">
+                            <div class="operator">=</div>
+                        </td>
+                        
+                        <!-- Tercer cuadro: resultado (siempre visible) -->
+                        <td class="table-cell result-cell">
+                            <div class="challenge-result-wrapper">
+                                <div id="challengeResultSelection" class="selection-text">Marcado 0 de 0</div>
+                                <div id="challengeResultSquare" class="challenge-result-grid"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="challenge-instruction" id="challengeInstruction"></div>
+            
+            <div class="challenge-actions">
+                <div class="nav-challenges">
+                    <button id="prevChallenge" class="nav-challenge-btn" disabled>← Anterior</button>
+                    <button id="nextChallenge" class="nav-challenge-btn">Siguiente →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Desarrollado por Astutosoft 2026</p>
+    </footer>
+    
+    <script src="desafios.js"></script>
+</body>
+</html>

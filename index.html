@@ -7,49 +7,98 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-title">Multiplicación de Fracciones</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Inicio</a>
+                <a href="desafios.html" class="nav-link">Desafíos</a>
+            </div>
+        </div>
+    </nav>
     <div class="container">
-        <h1>Multiplicación de Fracciones</h1>
+        <div class="header-section">
+            <h1>Multiplicación de Fracciones</h1>
+            <button id="infoBtn" class="info-icon" aria-label="Instrucciones">ℹ</button>
+        </div>
+        <hr class="title-divider">
+        <p class="brief-instruction">Indica cómo dividir cada cuadro, selecciona algunas de las partes y ve el resultado.</p>
+        
+        <!-- Popup de instrucciones -->
+        <div id="instructionsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Instrucciones</h2>
+                    <button class="close-btn" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Para multiplicar fracciones de manera visual, sigue estos pasos:</p>
+                    <ol>
+                        <li><strong>Divide cada cuadrado en secciones:</strong> Usa los botones numéricos (1 al 6) para dividir el primer cuadrado en columnas y el segundo cuadrado en filas. Por ejemplo, si seleccionas "3", el cuadrado se dividirá en 3 partes iguales.</li>
+                        <li><strong>Selecciona las secciones que usarás al multiplicar:</strong> Haz clic en las columnas del primer cuadrado y en las filas del segundo cuadrado para seleccionarlas. Las secciones seleccionadas se marcarán en color azul. Puedes hacer clic nuevamente para deseleccionarlas.</li>
+                        <li><strong>Revisa el resultado:</strong> Haz clic en "Ver resultado" para observar cómo se combinan las secciones seleccionadas. El resultado muestra la intersección de las columnas y filas seleccionadas, representando visualmente el producto de las fracciones.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
         
         <div class="main-content">
-            <!-- Primer cuadrado (columnas) -->
-            <div class="square-container">
-                <div id="square1" class="square"></div>
-                <div class="info-text">Divide el cuadro en:</div>
-                <div class="buttons-container">
-                    <button class="num-btn active" data-square="1" data-value="1">1</button>
-                    <button class="num-btn" data-square="1" data-value="2">2</button>
-                    <button class="num-btn" data-square="1" data-value="3">3</button>
-                    <button class="num-btn" data-square="1" data-value="4">4</button>
-                    <button class="num-btn" data-square="1" data-value="5">5</button>
-                    <button class="num-btn" data-square="1" data-value="6">6</button>
-                </div>
-            </div>
-            
-            <!-- Signo de multiplicación -->
-            <div class="operator">×</div>
-            
-            <!-- Segundo cuadrado (filas) -->
-            <div class="square-container">
-                <div id="square2" class="square"></div>
-                <div class="info-text">Divide el cuadro en:</div>
-                <div class="buttons-container">
-                    <button class="num-btn active" data-square="2" data-value="1">1</button>
-                    <button class="num-btn" data-square="2" data-value="2">2</button>
-                    <button class="num-btn" data-square="2" data-value="3">3</button>
-                    <button class="num-btn" data-square="2" data-value="4">4</button>
-                    <button class="num-btn" data-square="2" data-value="5">5</button>
-                    <button class="num-btn" data-square="2" data-value="6">6</button>
-                </div>
-            </div>
-            
-            <!-- Signo igual -->
-            <div class="operator">=</div>
-            
-            <!-- Botón ver resultado o cuadrado resultado -->
-            <div class="result-container">
-                <button id="showResult" class="result-btn">Ver resultado</button>
-                <div id="resultSquare" class="square hidden"></div>
-            </div>
+            <table class="multiplication-table">
+                <tr>
+                    <!-- Primer cuadrado (columnas) -->
+                    <td class="table-cell square-cell">
+                        <div class="square-container">
+                            <div id="selection1" class="selection-text">Marcado 0 de 1</div>
+                            <div id="square1" class="square"></div>
+                            <div class="info-text">Divide el cuadro en:</div>
+                            <div class="buttons-container">
+                                <button class="num-btn active" data-square="1" data-value="1">1</button>
+                                <button class="num-btn" data-square="1" data-value="2">2</button>
+                                <button class="num-btn" data-square="1" data-value="3">3</button>
+                                <button class="num-btn" data-square="1" data-value="4">4</button>
+                                <button class="num-btn" data-square="1" data-value="5">5</button>
+                                <button class="num-btn" data-square="1" data-value="6">6</button>
+                            </div>
+                        </div>
+                    </td>
+                    
+                    <!-- Signo de multiplicación -->
+                    <td class="table-cell operator-cell">
+                        <div class="operator">×</div>
+                    </td>
+                    
+                    <!-- Segundo cuadrado (filas) -->
+                    <td class="table-cell square-cell">
+                        <div class="square-container">
+                            <div id="selection2" class="selection-text">Marcado 0 de 1</div>
+                            <div id="square2" class="square"></div>
+                            <div class="info-text">Divide el cuadro en:</div>
+                            <div class="buttons-container">
+                                <button class="num-btn active" data-square="2" data-value="1">1</button>
+                                <button class="num-btn" data-square="2" data-value="2">2</button>
+                                <button class="num-btn" data-square="2" data-value="3">3</button>
+                                <button class="num-btn" data-square="2" data-value="4">4</button>
+                                <button class="num-btn" data-square="2" data-value="5">5</button>
+                                <button class="num-btn" data-square="2" data-value="6">6</button>
+                            </div>
+                        </div>
+                    </td>
+                    
+                    <!-- Signo igual -->
+                    <td class="table-cell operator-cell">
+                        <div class="operator">=</div>
+                    </td>
+                    
+                    <!-- Resultado -->
+                    <td class="table-cell result-cell">
+                        <div class="result-container">
+                            <button id="showResult" class="result-text-btn">Ver resultado</button>
+                            <div id="resultSelection" class="selection-text hidden">Marcado 0 de 0</div>
+                            <div id="resultSquare" class="square result-placeholder"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     
