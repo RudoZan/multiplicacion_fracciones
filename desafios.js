@@ -418,10 +418,10 @@ function checkAnswer() {
     }
     
     if (isCorrect) {
-        feedback.textContent = '¡Correcto! Muy bien hecho.';
+        feedback.textContent = 'Correcto.';
         feedback.className = 'challenge-feedback correct';
     } else {
-        feedback.textContent = 'Incorrecto. Por favor revisa e intenta nuevamente.';
+        feedback.textContent = 'Incorrecto. Revisa e intenta de nuevo.';
         feedback.className = 'challenge-feedback incorrect';
     }
 }

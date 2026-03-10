@@ -225,7 +225,7 @@ body {
 .page-desafios .challenge-content .square.challenge-square-editable {
     border: 3px solid #2c5aa0;
     box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.3), 0 4px 16px rgba(44, 90, 160, 0.25);
-    background-color: #c5daf5;
+    background: linear-gradient(135deg, #e8f0fa 0%, #d4e4f7 50%, #e0ecf9 100%);
 }
 .page-desafios .challenge-content .square.challenge-square-editable:hover {
     box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.4), 0 6px 20px rgba(44, 90, 160, 0.3);
@@ -798,7 +798,7 @@ h1 {
 .challenge-result-wrapper.challenge-result-editable .challenge-result-grid {
     border: 3px solid #2c5aa0;
     box-shadow: 0 0 0 2px rgba(44, 90, 160, 0.3), 0 4px 16px rgba(44, 90, 160, 0.25);
-    background-color: #c5daf5;
+    background: linear-gradient(135deg, #e8f0fa 0%, #d4e4f7 50%, #e0ecf9 100%);
     cursor: pointer;
 }
 
@@ -888,5 +888,58 @@ footer p {
     .container {
         max-width: 100%;
         padding: 20px;
+    }
+    
+    .challenge-result-grid {
+        width: 160px !important;
+        height: 160px !important;
+    }
+    
+    .page-desafios .challenge-content .square {
+        width: 160px !important;
+        height: 160px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .challenge-info {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 12px;
+    }
+    
+    .challenge-counter {
+        font-size: 0.95em;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .challenge-feedback {
+        font-size: 0.9em;
+        padding: 6px 12px;
+        text-align: center;
+        order: 3;
+        width: 100%;
+    }
+    
+    .challenge-info .check-btn {
+        margin-left: 0;
+        width: 100%;
+        order: 2;
+    }
+    
+    .square,
+    .challenge-result-grid {
+        width: 140px !important;
+        height: 140px !important;
+    }
+    
+    .page-desafios .challenge-content .square {
+        width: 140px !important;
+        height: 140px !important;
+    }
+    
+    .selection-text {
+        font-size: 0.85em;
     }
 }
