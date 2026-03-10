@@ -45,7 +45,10 @@
         
         <div class="challenge-info">
             <div class="challenge-counter">Desafío <span id="currentChallenge">1</span> de <span id="totalChallenges">8</span></div>
-            <div class="challenge-feedback" id="challengeFeedback"></div>
+            <div class="challenge-feedback-wrap">
+                <div class="challenge-feedback" id="challengeFeedback"></div>
+                <button id="nextAfterCorrect" class="next-after-correct-btn" style="display: none;">Siguiente desafío →</button>
+            </div>
             <button id="checkAnswer" class="check-btn">Revisar</button>
         </div>
         
@@ -93,10 +96,7 @@
             <div class="challenge-instruction" id="challengeInstruction"></div>
             
             <div class="challenge-actions">
-                <div class="nav-challenges">
-                    <button id="prevChallenge" class="nav-challenge-btn" disabled>← Anterior</button>
-                    <button id="nextChallenge" class="nav-challenge-btn">Siguiente →</button>
-                </div>
+                <div id="challengeNavNumbers" class="challenge-nav-numbers"></div>
             </div>
         </div>
     </div>

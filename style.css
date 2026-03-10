@@ -112,6 +112,34 @@ body {
     margin-left: auto;
 }
 
+.challenge-feedback-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.next-after-correct-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #4caf50 0%, #43a047 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.35);
+}
+
+.next-after-correct-btn:hover {
+    background: linear-gradient(135deg, #43a047 0%, #388e3c 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
 .challenge-counter {
     font-size: 1.1em;
     font-weight: 600;
@@ -183,32 +211,38 @@ body {
     transform: translateY(0);
 }
 
-.nav-challenges {
+.challenge-nav-numbers {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
 }
 
-.nav-challenge-btn {
-    padding: 10px 20px;
-    font-size: 0.9em;
-    background-color: #e8ecf1;
+.challenge-nav-num-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 1em;
+    font-weight: 600;
     color: #2c3e50;
+    background-color: #e8ecf1;
     border: 2px solid #5a7ba8;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
-.nav-challenge-btn:hover:not(:disabled) {
-    background-color: #5a7ba8;
-    color: white;
+.challenge-nav-num-btn:hover {
+    background-color: #d0d8e4;
     transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(90, 123, 168, 0.25);
 }
 
-.nav-challenge-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.challenge-nav-num-btn.active {
+    background: linear-gradient(135deg, #5a7ba8 0%, #4a6fa5 100%);
+    color: white;
+    border-color: #4a6fa5;
+    box-shadow: 0 2px 10px rgba(90, 123, 168, 0.35);
 }
 
 /* En desafíos: dos cuadros fijos y uno editable. Solo el editable se puede clicar. */
@@ -914,12 +948,16 @@ footer p {
         text-align: center;
     }
     
+    .challenge-feedback-wrap {
+        width: 100%;
+        order: 3;
+        justify-content: center;
+    }
+    
     .challenge-feedback {
         font-size: 0.9em;
         padding: 6px 12px;
         text-align: center;
-        order: 3;
-        width: 100%;
     }
     
     .challenge-info .check-btn {

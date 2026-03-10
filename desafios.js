@@ -89,15 +89,33 @@ function initializeInstructionsModal() {
     });
 }
 
-// Inicializar botones de desafío
+// Inicializar botones de desafío (numerados 1-8 y botón "Siguiente desafío" al acertar)
 function initializeChallengeButtons() {
     const checkBtn = document.getElementById('checkAnswer');
-    const prevBtn = document.getElementById('prevChallenge');
-    const nextBtn = document.getElementById('nextChallenge');
+    const navContainer = document.getElementById('challengeNavNumbers');
+    const nextAfterCorrectBtn = document.getElementById('nextAfterCorrect');
     
     checkBtn.addEventListener('click', checkAnswer);
-    prevBtn.addEventListener('click', () => loadChallenge(currentChallengeIndex - 1));
-    nextBtn.addEventListener('click', () => loadChallenge(currentChallengeIndex + 1));
+    
+    for (let i = 0; i < challenges.length; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'challenge-nav-num-btn' + (i === 0 ? ' active' : '');
+        btn.textContent = i + 1;
+        btn.dataset.index = i;
+        btn.setAttribute('aria-label', 'Desafío ' + (i + 1));
+        btn.addEventListener('click', () => loadChallenge(i));
+        navContainer.appendChild(btn);
+    }
+    
+    if (nextAfterCorrectBtn) {
+        nextAfterCorrectBtn.addEventListener('click', () => {
+            if (currentChallengeIndex < challenges.length - 1) {
+                loadChallenge(currentChallengeIndex + 1);
+                nextAfterCorrectBtn.style.display = 'none';
+            }
+        });
+    }
 }
 
 // Inicializar cuadrados del desafío
@@ -120,12 +138,16 @@ function loadChallenge(index) {
     currentChallengeIndex = index;
     const challenge = challenges[index];
     
+    const nextAfterCorrectBtn = document.getElementById('nextAfterCorrect');
+    if (nextAfterCorrectBtn) nextAfterCorrectBtn.style.display = 'none';
+    
     // Actualizar contador
     document.getElementById('currentChallenge').textContent = index + 1;
     
-    // Actualizar navegación
-    document.getElementById('prevChallenge').disabled = index === 0;
-    document.getElementById('nextChallenge').disabled = index === challenges.length - 1;
+    // Actualizar botones numerados (marcar el activo)
+    document.querySelectorAll('.challenge-nav-num-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+    });
     
     // Limpiar feedback
     document.getElementById('challengeFeedback').textContent = '';
@@ -420,8 +442,14 @@ function checkAnswer() {
     if (isCorrect) {
         feedback.textContent = 'Correcto.';
         feedback.className = 'challenge-feedback correct';
+        const nextAfterCorrectBtn = document.getElementById('nextAfterCorrect');
+        if (nextAfterCorrectBtn && currentChallengeIndex < challenges.length - 1) {
+            nextAfterCorrectBtn.style.display = 'inline-flex';
+        }
     } else {
         feedback.textContent = 'Incorrecto. Revisa e intenta de nuevo.';
         feedback.className = 'challenge-feedback incorrect';
+        const nextAfterCorrectBtn = document.getElementById('nextAfterCorrect');
+        if (nextAfterCorrectBtn) nextAfterCorrectBtn.style.display = 'none';
     }
 }
